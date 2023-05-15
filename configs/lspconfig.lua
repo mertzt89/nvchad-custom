@@ -13,5 +13,27 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- 
--- lspconfig.pyright.setup { blabla}
+lspconfig.pylsp.setup {
+  settings = {
+    pylsp = {
+      configurationSources = { "flake8" },
+      plugins = {
+        autopep8 = {
+          enabled = false,
+        },
+        black = {
+          enabled = true,
+        },
+        flake8 = {
+          enabled = true,
+        },
+        pycodestyle = {
+          enabled = false,
+        },
+        yapf = {
+          enabled = false,
+        },
+      },
+    },
+  },
+}
