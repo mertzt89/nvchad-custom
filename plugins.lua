@@ -59,6 +59,19 @@ local plugins = {
     end,
   },
 
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle" },
+    -- requires = "kyazdani42/nvim-web-devicons",
+    dependencies = { "folke/lsp-trouble.nvim" },
+    config = function()
+      require("trouble").setup {
+        auto_open = true,
+        auto_close = true,
+      }
+    end,
+  },
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
