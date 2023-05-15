@@ -52,6 +52,13 @@ local plugins = {
     lazy = false,
   },
 
+  {
+    "stefandtw/quickfix-reflector.vim",
+    init = function()
+      require("core.utils").lazy_load "quickfix-reflector.vim"
+    end,
+  },
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
