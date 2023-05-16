@@ -41,6 +41,9 @@ M.mason = {
 
     -- python
     "python-lsp-server",
+
+    -- YAML
+    "yamllint",
   },
 }
 

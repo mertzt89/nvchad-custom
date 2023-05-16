@@ -16,6 +16,9 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+
+  -- YAML
+  b.diagnostics.yamllint,
 }
 
 null_ls.setup {
