@@ -66,7 +66,7 @@ local plugins = {
     dependencies = { "folke/lsp-trouble.nvim" },
     config = function()
       require("trouble").setup {
-        auto_open = true,
+        auto_open = false,
         auto_close = true,
       }
     end,
