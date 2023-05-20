@@ -29,6 +29,63 @@ local plugins = {
   },
 
   {
+    "mfussenegger/nvim-dap",
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "dap-float",
+        callback = function()
+          vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { silent = true })
+        end,
+      })
+    end,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    cmd = { "DapInstall", "DapUninstall" },
+    dependencies = { "mason.nvim", "nvim-dap" },
+    config = function()
+      require("mason-nvim-dap").setup {
+        ensure_installed = { "cppdbg" },
+        handlers = {
+          function(config)
+            -- all sources with no handler get passed here
+
+            -- Keep original functionality
+            require("mason-nvim-dap").default_setup(config)
+          end,
+          cppdbg = function(config)
+            -- config.configurations = cppdbg_configs
+            config.adapters = vim.tbl_extend("keep", config.adapters, { options = { initialize_timeout_sec = 10 } })
+            config.configurations = {}
+            require("mason-nvim-dap").default_setup(config)
+            require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" } })
+          end,
+        },
+      }
+    end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = false,
+    dependencies = { "mason-nvim-dap.nvim" },
+    config = function()
+      require("dapui").setup()
+      local dap, dapui = require "dap", require "dapui"
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.after.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.after.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
