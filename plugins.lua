@@ -72,6 +72,16 @@ local plugins = {
     end,
   },
 
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
+  },
+
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  },
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

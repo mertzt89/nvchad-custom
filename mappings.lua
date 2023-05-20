@@ -23,6 +23,9 @@ M.telescope = {
       end,
       "Grep Operator (incl. ignored)",
     },
+
+    ["<leader>fs"] = { "<cmd> Telescope lsp_dynamic_workspace_symbols <CR>", "LSP symbols" },
+    ["<leader>fd"] = { "<cmd> Telescope lsp_document_symbols <CR>", "LSP document symbols" },
   },
 
   x = {
