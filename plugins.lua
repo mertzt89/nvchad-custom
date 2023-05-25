@@ -132,6 +132,24 @@ local plugins = {
   {
     "nvim-telescope/telescope.nvim",
     opts = overrides.telescope,
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "telescope")
+      local telescope = require "telescope"
+      telescope.setup(opts)
+
+      vim.api.nvim_create_autocmd("WinLeave", {
+        callback = function()
+          if vim.bo.ft == "TelescopePrompt" and vim.fn.mode() == "i" then
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
+          end
+        end,
+      })
+
+      -- load extensions
+      for _, ext in ipairs(opts.extensions_list) do
+        telescope.load_extension(ext)
+      end
+    end,
   },
 
   {
