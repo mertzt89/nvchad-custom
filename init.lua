@@ -27,7 +27,6 @@ local function grep_operator(t, searh_all, ...)
     if searh_all == true then
       opts = { search = query, additional_args = { "--no-ignore-vcs", "--hidden" } }
     end
-    print(vim.pretty_print(opts))
     require("telescope.builtin").grep_string(opts)
   end
 
